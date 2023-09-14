@@ -31,7 +31,7 @@ function meas = instPiezo_MDT693(visaAddr, option, varargin)
 %% Helper functions
 % TODO: replace with `serialport`
 piezoWrite = @(x) visaWrite(visaAddr, x);
-piezoRead = @(x) replace(visaRead(visaAddr, x), {'>',char([13 13])}, '');
+piezoRead = @(x) replace(visaRead(visaAddr, x), {'>', char([13 13])}, '');
 
 
 %% Defaults and magic numbers
@@ -39,14 +39,13 @@ chs = 'xyz';    % For MDT693B
 
 
 %% Set appropriate properties for this abnormal type of connection
-visaObj = visaConn(visaAddr, 'noopen');
+visaObj = visaConn(visaAddr);
 visaObj.BaudRate = 115200;
 visaObj.FlowControl = 'none';
 visaObj.Parity = 'none';
-visaObj.Terminator = {'>', 'LF'};
+configureTerminator(visaObj, 'CR');
 if (~contains(visaObj.Status, 'open')) || ...
         (visaObj.InputBufferSize < 4096)
-    fclose(visaObj);
     visaObj.InputBufferSize = 4096;
     fopen(visaObj);
 end

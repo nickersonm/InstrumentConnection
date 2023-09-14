@@ -13,12 +13,13 @@
 % Defaults
 dmmID = 'GPIB16';
 avgT = 5.0;
-nWire = 4;
+nWire = 2;
+offsetR = 2;
 
 
 %% Initialize
-disp('Initializing...');
-ifaceDMM(dmmID, 'reset', 't', 0.1, 'w', nWire, 'rmeas');
+% disp('Initializing...');
+ifaceDMM(dmmID, 'reset', 'w', nWire, 'rmeas');
 
 
 %% Measure
@@ -26,8 +27,13 @@ ifaceDMM(dmmID, 'reset', 't', 0.1, 'w', nWire, 'rmeas');
 %     sprintf('\n\n# R\tRerr\tI\tIerr\tV\tVerr\tPad1\tPad2'), ...
 %      'Delimiter', '', '-append');
 
+disp('Measuring...');
 ifaceDMM(dmmID, 't', 0.05, 'rmeas');
 [IV, R, err] = ifaceDMM(dmmID, 't', avgT, 'rmeas');
+
+if nWire == 2 && exist('offsetR', 'var') && offsetR > 0
+    R = R - offsetR;
+end
 
 fprintf('R: %.4g ± %.4g ohms\n', R, err(3));
 %     dlmwrite([savName '.dat'], ...
@@ -36,4 +42,4 @@ fprintf('R: %.4g ± %.4g ohms\n', R, err(3));
 
 
 %% Clean up
-ifaceDMM(dmmID, 'state', 0, 't', 0.1);
+ifaceDMM(dmmID, 'state', 0, 't', 0);

@@ -95,7 +95,7 @@ while any(abs(centerV - lastV) > tolV)
         % Set and measure
         ifacePiezo(piezoID{pz}, 'vch', chs{pz}(ch), V{ch}(i) );
         pause(0.02);
-        if i==1; pause(0.2); end    % Longer when jumping to the first
+        if i==1; pause(0.5); end    % Longer when jumping to the first
 %         V{ch}(i) = allV(ch);
         L{ch}(i) = ifacePM(pmID)*1e3;
         

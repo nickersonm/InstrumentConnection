@@ -17,7 +17,7 @@
 %     'value': Value for options that require it
 %
 %     Options:
-%       'read' | 'curstate': Retrieves present power and wavelength
+%       'read' | 'curstate': Retreives present power and wavelength
 %       'state', %i: Turns laser on or off
 %         'on': Same as 'state', 1
 %         'off': Same as 'state', 0

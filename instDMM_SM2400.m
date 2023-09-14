@@ -62,6 +62,7 @@ dmmOutState = @() str2double(visaRead(visaAddr, 'OUTP?'));
 
 
 %% Execute selected command
+dmmWrite("*CLS");
 switch lower(option)
     case 'reset'
         % Set standard settings
@@ -239,10 +240,6 @@ switch lower(option)
             error('Unexpected option "%s"', num2str(option));
         end
 end
-
-
-%% Clean up
-dmmWrite('SYST:LOCAL');  % Switch back to local mode if possible
 
 
 end

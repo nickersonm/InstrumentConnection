@@ -1,5 +1,5 @@
 %% ifacePM.m  MN 2018-09-19
-% Retrieves power measurement for a variety of IPL's power meters
+% Retreives power measurement for a variety of power meters
 % 
 % Requirements:
 %   - VISA interface functions in path
@@ -76,8 +76,8 @@ end
 
 % Update timeout if needed
 meterConn = visaConn(meter.visaAddr);
-if meterConn.Timeout > 0.5
-    meterConn.Timeout = 0.5;
+if meterConn.Timeout > 1
+    meterConn.Timeout = 1;
 end
 
 
@@ -130,7 +130,7 @@ end
 power = reshape(power,1,[]);    % Some meters return many measurements
 
 powererr = std(power);
-power = nanmean(power);
+power = mean(power, "omitnan");
 
 % Check range validity
 if ~inrange(power, meter.powerlim)

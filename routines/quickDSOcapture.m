@@ -2,17 +2,17 @@
 % MN 2020-07-16
 
 %% Parameters
-die = '121.1D1.5';
-dev = '11-fullsweep';
+die = "184.11FP";
+dev = "90dSDT2";
 lambda = 1030;
-pol = 2;    % 0 = zero, 1 = high EA, 2 = low EA
-measurement = 'IQ4';
-maxPoints = 1;  % Capture maximum number of points?
-chs = [4,2,3];
+pol = 2;    % 0 = zero, 1 = high coupling, 2 = low coupling
+measurement = 'MZM';
+maxPoints = 0;  % Capture maximum number of points?
+chs = [4,1,2];
 
-savName = sprintf('%s_%s-%s_%s_%i-p%i_%s', datestr(now, 'yyyymmdd'), ...
-    die, dev, measurement, lambda, pol, datestr(now, 'Thhmmss'));
-savPath='~/labshare/measurements/station2';
+savName = sprintf("%s_%s-%s_%s-%inm_pol%i_%s", string(datetime("now", "Format", "yyyyMMdd")), ...
+    die, dev, measurement, lambda, pol, "T"+string(datetime("now", "Format", "hhmmss.SSS")));
+savPath="C:\Users\IMPRESS Lab\LabShare\Measurements\ESI1030\";
 
 dsoAddr = mapDSO('Station2USB').visaAddr;
 
@@ -34,5 +34,5 @@ if maxPoints == 1
     visaWrite(dsoAddr, sprintf(':TIM:RANG %g', oldTime));
 end
 
-save([savPath savName '.mat'], 'X', 'Y123', 'dev', 'die', 'lambda', 'measurement', 'pol', 'dsoAddr', 'chs');
+save(savPath+savName+".mat", 'X', 'Y123', 'dev', 'die', 'lambda', 'measurement', 'pol', 'dsoAddr', 'chs');
 

@@ -39,11 +39,11 @@ chs = 'xyz';    % For MDT693B
 
 
 %% Set appropriate properties for this abnormal type of connection
-visaObj = visaConn(visaAddr, 'noopen');
+visaObj = visaConn(visaAddr);
 visaObj.BaudRate = 115200;
 visaObj.FlowControl = 'none';
 visaObj.Parity = 'none';
-visaObj.Terminator = {'>', 'LF'};
+configureTerminator(visaObj, {'>', 'LF'});
 if (~contains(visaObj.Status, 'open')) || ...
         (visaObj.InputBufferSize < 4096)
     fclose(visaObj);

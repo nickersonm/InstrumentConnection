@@ -129,6 +129,12 @@ end
 
 
 %% Set options as requested
+% Turn off
+if ~isnan(state) && state == 0
+    dmmInterface(DMM.visaAddr, 'state', state);
+    pause(0.25); % Wait for update
+end
+
 % Reset/initialize
 if reset == 1
     dmmInterface(DMM.visaAddr, 'reset');
@@ -182,8 +188,8 @@ if ~isnan(outV)
     pause(0.1); % Wait for update
 end
 
-% Change state
-if ~isnan(state)
+% Turn on
+if ~isnan(state) && state == 1
     dmmInterface(DMM.visaAddr, 'state', state);
     pause(0.25); % Wait for update
 end
@@ -220,7 +226,7 @@ while toc < avgT
     [I(end+1), V(end+1), measurement(:, end+1)] = measAll(meas);
 end
 stdIVM = std([I; V; measurement], 0, 2);
-IV = mean([I; V], 2); measurement = mean([measurement], 2);
+IV = mean([I; V], 2); measurement = mean(measurement, 2);
 
 
 end

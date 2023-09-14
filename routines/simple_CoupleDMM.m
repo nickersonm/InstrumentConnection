@@ -11,11 +11,9 @@ tolV = spanV/5;
 
 % DMM settings
 dmmID = 'GPIB16';
-dmmWires = 2;
-Ilim = 5e-3;    % DMM compliance current
-if ~exist('dmmV', 'var')
-    dmmV = -10;
-end
+dmmWires = 4;
+Ilim = 10e-3;    % DMM compliance current
+dmmV = -2;
 
 % LDC settings
 ldcID = 'Station2';
@@ -76,6 +74,7 @@ while any(abs(centerV - lastV) > tolV)
     for i = 1:size(V{ch},1)
         % Set and measure
         ifacePiezo(piezoID, 'vch', chs{ch}, V{ch}(i) );
+        if i==1; pause(0.5); end    % Longer when jumping to the first
 %         V{ch}(i) = allV(ch);
         IV = ifaceDMM(dmmID);
         I{ch}(i) = IV(1)*1e3;
@@ -144,6 +143,6 @@ ifaceDMM(dmmID, 'voltage', dmmV, 'avg', 0, 'off');
 % Averages multiple y-values for identical x-values
 function xy = bindata(x, y)
     [x, ~, xi] = uniquetol(x, 1e-3);
-    y = accumarray(xi, y, [], @nanmean);
+    y = accumarray(xi, y, [], @(x) mean(x, "omitnan"));
     xy = [x(:), y(:)];
 end
