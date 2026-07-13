@@ -7,7 +7,7 @@
 % 
 % Usage: [Y, X] = dev_DSOgetTrace(ch, visaAddr)
 %   Parameters:
-%    ch: Which channel to retreive
+%    ch: Which channel to Retrieve
 %    visaAddr: VISA address to connect to
 % 
 % Returns:

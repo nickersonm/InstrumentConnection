@@ -1,5 +1,5 @@
 %% ifacePM.m  MN 2018-09-19
-% Retreives power measurement for a variety of power meters
+% Retrieves power measurement for a variety of power meters
 % 
 % Requirements:
 %   - VISA interface functions in path

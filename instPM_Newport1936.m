@@ -18,7 +18,7 @@
 %     Options:
 %       'reset': Resets/initializes power meter
 %       't', %f: Sets measurement time to this
-%       't?':   Retreive measurement time
+%       't?':   Retrieve measurement time
 %       'measure': Measures one reading and returns value
 %       'wavelength', %f: Sets wavelength to this if necessary
 %

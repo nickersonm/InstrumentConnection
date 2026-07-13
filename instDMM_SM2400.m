@@ -135,15 +135,15 @@ switch lower(option)
                 error('Invalid wire number specified: %i', value)
         end
     case 'outi'
-        % Retreive output current setpoint
+        % Retrieve output current setpoint
         % Read value: amps
         measurement = dmmRead('SOUR:CURR:LEV?');
     case 'outv'
-        % Retreive output voltage setpoint
+        % Retrieve output voltage setpoint
         % Read value: volts
         measurement = dmmRead('SOUR:VOLT:LEV?');
     case 'outlim'
-        % Retreive output [V; I] limits
+        % Retrieve output [V; I] limits
         % Read value: [amps, volts]
         measurement = [dmmRead('SENS:CURR:PROT:LEV?'); ...
                        dmmRead('SENS:VOLT:PROT:LEV?')];
@@ -224,7 +224,7 @@ switch lower(option)
             dmmWrite('SENS:AVER:COUN 1; :SENS:AVER 0');
         end
     case 'avgt'
-        % Retreive averaging time
+        % Retrieve averaging time
         if strncmpi(dmmQuery('SENS:AVER?'), '1', 1) == 1
             % Read value: 'power line cycles', 60Hz
             % Experimentally, only runs at 13.85Hz!

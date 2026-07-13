@@ -108,15 +108,15 @@ switch lower(option)
                 error('Invalid wire number specified: %i', value)
         end
     case 'outi'
-        % Retreive output current setpoint
+        % Retrieve output current setpoint
         % Read value: CHECK UNITS
         measurement = dmmQuery('COMMAND_READ_I_SET');
     case 'outv'
-        % Retreive output voltage setpoint
+        % Retrieve output voltage setpoint
         % Read value: CHECK UNITS
         measurement = dmmQuery('COMMAND_READ_V_SET');
     case 'outlim'
-        % Retreive output [I; V] limits
+        % Retrieve output [I; V] limits
         % Read value: CHECK UNITS
         measurement = [dmmQuery('COMMAND_READ_I_LIM'); ...
                        dmmQuery('COMMAND_READ_V_LIM')];
@@ -138,7 +138,7 @@ switch lower(option)
         % Read value: CHECK UNITS
         measurement = dmmQuery('COMMAND_READ_R');
     case 'avgt'
-        % Retreive averaging time
+        % Retrieve averaging time
         % Read value: CHECK UNITS
         measurement = dmmQuery('COMMAND_READ_T_AVG');
         % Calculate units if needed
